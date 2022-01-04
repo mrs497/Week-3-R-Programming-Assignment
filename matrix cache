@@ -1,0 +1,27 @@
+##Hello! This is for a peer evaluation assignment- h is the solved value.
+
+makeCacheMatrix <- function(x = matrix()) {
+  h <- NULL
+  set <- function(y) {
+    x <<- y
+    h <<- NULL
+  }
+  get <- function() x
+  setSolve <- function(solve) h <<- solve
+  getSolve <- function() h
+  list(set = set, get = get,
+       setSolve = setSolve,
+       getSolve = getSolve)
+}
+## In a similar vein for the below, I exchanged "m" for "h" and "mean" for "solve"
+cacheSolve <- function(x, ...) {
+  h <- x$getSolve()
+  if(!is.null(h)) {
+    message("getting inversed matrix")
+    return(h)
+  }
+  data <- x$get()
+  h <- solve(data, ...)
+  x$setSolve(h)
+  h
+}
